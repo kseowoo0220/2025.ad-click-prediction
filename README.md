@@ -1,66 +1,84 @@
 # Ad Click Prediction
 
-## Project Overview
-This project focuses on **predicting whether a user will click on an online advertisement** using demographic and contextual features. The main objective is to **improve ad targeting and campaign efficiency** by identifying the most influential factors driving ad clicks.
+This project predicts whether a user will click on an online advertisement (ad) based on demographic and contextual features. The workflow includes **EDA, feature engineering, multicollinearity checks, model building (Logistic Regression vs XGBoost), performance evaluation, and business insights**.  
 
 ---
+
 ## Dataset
-- **Size**: 814 observations, multiple categorical & numerical features
-- **Key Features**:
-  - Age group
-  - Gender
-  - Device type (Mobile, Tablet, Desktop)
-  - Time of day (Morning, Afternoon, Night)
-  - Ad position (Top, Side, Bottom)
-  - Browsing history category
-- **Target Variable**: `click` (1 = clicked, 0 = not clicked)
+- **Sample size**: 814 users  
+- **Target variable**: `click` (1 = clicked, 0 = not clicked)  
+- **Original features**: 9 variables  
+
+### Features
+- **id**: Unique identifier for each user  
+- **full_name**: User's name formatted as `"UserX"` for anonymity  
+- **age**: Age of the user (18–64 years)  
+- **gender**: Gender (Male, Female, Non-Binary)  
+- **device_type**: Device used to view the ad (Mobile, Desktop, Tablet)  
+- **ad_position**: Ad position on the webpage (Top, Side, Bottom)  
+- **browsing_history**: User’s browsing activity before seeing the ad (Shopping, News, Entertainment, Education, Social Media)  
+- **time_of_day**: When the user viewed the ad (Morning, Afternoon, Evening, Night)  
+- **click**: Target label (1 = clicked, 0 = not clicked)  
 
 ---
-## Data Preprocessing
-- **Missing Values**: no missing and outlier in dataset
-- **Encoding**: One-hot encoding for categorical features
-- **Feature Scaling**: Standardized numerical features
-- **Train-Test Split**: 80/20 ratio
+
+## Workflow
+1. **Exploratory Data Analysis (EDA)**  
+   - Distribution of `click` variable  
+   - CTR differences by age group, gender, device, ad position, browsing history, time of day  
+
+2. **Feature Engineering**  
+   - Created categorical variable `age_group`  
+   - One-hot encoding for categorical predictors  
+
+3. **Multicollinearity Check**  
+   - Correlation heatmap  
+   - Variance Inflation Factor (VIF) → no significant multicollinearity  
+
+4. **Modeling**  
+   - **Logistic Regression** as baseline model  
+   - **XGBoost** as main predictive model  
+   - ROC-AUC comparison and ROC Curve visualization  
 
 ---
-## Exploratory Data Analysis
-Key findings from EDA:
-- Younger users (20s, 30s) show higher click-through rates (CTR)
-- Mobile and tablet users engage more compared to desktop
-- Ads placed at the top or side are more effective
-- Nighttime shows significantly higher CTR
 
-Visualizations:
-- CTR by each group
+## Final Results & Business Insights
 
----
-## Modeling
-Two models were implemented:
+### Model Performance
+- **Logistic Regression (Baseline)**  
+  - ROC-AUC: **0.523**  
+  - Provides interpretability but limited predictive power.  
 
-1. **Logistic Regression (Baseline)**
-   - ROC-AUC: 0.523
-   - Strength: Interpretability
-   - Limitation: Weak predictive power
+- **XGBoost (Main Model)**  
+  - ROC-AUC: **0.826**  
+  - Delivers substantially stronger predictive performance and captures complex feature interactions.  
 
-2. **XGBoost (Final Model)**
-   - ROC-AUC: 0.826
-   - Strength: Captures non-linear relationships and feature interactions
-   - Selected as the final model due to superior performance
+➡ **XGBoost was selected as the final model** due to its superior accuracy and robustness.  
 
 ---
-## Feature Importance (XGBoost)
-Top predictors of ad clicks:
-1. Age group (30s)
-2. Time of day (Night)
-3. Ad position (Top, Side)
-4. Browsing history (News)
-5. Device type (Mobile, Tablet)
+
+### Key Predictors
+- **Age group (30s)** – Strongest predictor of ad clicks  
+- **Time of Day (Night)** – Higher engagement at night  
+- **Ad Position (Top, Side)** – Placement strongly impacts CTR  
+- **Browsing History (News)** – News readers more likely to click ads  
+- **Device Type (Mobile, Tablet)** – Supports mobile-first strategy  
 
 ---
-## Business Insights
-- **Target younger demographics (30s)** for higher engagement
-- **Nighttime campaigns** yield stronger click-through performance
-- **Prioritize premium ad positions** (Top, Side) for visibility
-- **Mobile-first strategy** is validated
-- **News content alignment** enhances ad relevance
 
+### Strategic Takeaways
+1. **Targeting**: Focus on **younger demographics (30s)**  
+2. **Timing**: Run campaigns in **evening/night hours**  
+3. **Placement**: Prioritize **top/side ad positions**  
+4. **Personalization**: Use browsing history for **context-relevant ads**  
+
+---
+
+## Tech Stack
+- **Python**: Pandas, NumPy, Scikit-learn, Statsmodels, XGBoost  
+- **Visualization**: Matplotlib, Seaborn  
+- **Notebook**: Jupyter  
+
+ 
+- Try LightGBM / CatBoost models  
+- Deploy as a Streamlit dashboard for live prediction demo  
