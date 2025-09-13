@@ -1,8 +1,7 @@
 # Ad Click Prediction
 
 ## Project Overview
-This project focuses on **predicting whether a user will click on an online advertisement** using demographic and contextual features.  
-The main objective is to **improve ad targeting and campaign efficiency** by identifying the most influential factors driving ad clicks.
+This project focuses on **predicting whether a user will click on an online advertisement** using demographic and contextual features. The main objective is to **improve ad targeting and campaign efficiency** by identifying the most influential factors driving ad clicks.
 
 ---
 ## Dataset
