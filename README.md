@@ -80,5 +80,3 @@ This project predicts whether a user will click on an online advertisement (ad) 
 - **Notebook**: Jupyter  
 
  
-- Try LightGBM / CatBoost models  
-- Deploy as a Streamlit dashboard for live prediction demo  
